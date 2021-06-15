@@ -22,7 +22,7 @@ export const Dashboard = ({ setAuth }) => {
   }
   useEffect(() => {
     getName();
-  });
+  }, []);
   return (
     <Fragment>
       <h1>Dashbaord {name}</h1>
