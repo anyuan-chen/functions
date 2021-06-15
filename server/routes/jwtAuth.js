@@ -3,8 +3,10 @@ const router = express.Router();
 const pool = require("../db.js");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
+const validInfo = require("../middleware/validinfo");
+const authorization = require("../middleware/authorization");
 
-router.post("/register", async (req, res) => {
+router.post("/register", validInfo, async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const user = await pool.query("SELECT * FROM users WHERE user_email=$1", [
@@ -31,7 +33,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", validInfo, async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await pool.query("SELECT * FROM users WHERE user_email=$1", [
@@ -49,6 +51,15 @@ router.post("/login", async (req, res) => {
     }
     const token = jwtGenerator(user.rows[0].user_id);
     res.json({ token });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get("/is-verify", authorization, async (req, res) => {
+  try {
+    res.json(true);
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Server Error");

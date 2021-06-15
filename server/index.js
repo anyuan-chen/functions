@@ -9,7 +9,7 @@ app.use(express.json())
 
 //register + login
 app.use("/auth" , require("./routes/jwtAuth"))
-
+app.use("/dashboard", require("./routes/dashboard"))
 app.listen(5000, () => {
   console.log("working");
 });
