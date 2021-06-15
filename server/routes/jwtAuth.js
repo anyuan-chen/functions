@@ -4,7 +4,7 @@ const pool = require("../db.js");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator");
 const validInfo = require("../middleware/validinfo");
-const authorization = require("../middleware/authorization");
+const authorization = require("../middleware/authorize");
 
 router.post("/register", validInfo, async (req, res) => {
   try {
@@ -14,10 +14,9 @@ router.post("/register", validInfo, async (req, res) => {
     ]);
 
     if (user.rows.length !== 0) {
-      return res.status(401).send("duplicate user");
+      return res.status(401).json("duplicate user");
     }
-    const saltRound = 10;
-    const salt = await bcrypt.genSalt(saltRound);
+    const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(password, salt);
 
     const newUser = await pool.query(
@@ -40,7 +39,7 @@ router.post("/login", validInfo, async (req, res) => {
       email,
     ]);
     if (user.rows.length === 0) {
-      return res.status(401).send("no user");
+      return res.status(401).json("no user");
     }
     const validPassword = await bcrypt.compare(
       password,

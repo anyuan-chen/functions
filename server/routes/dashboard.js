@@ -1,16 +1,26 @@
 const router = require("express").Router();
+const authorize = require("../middleware/authorize");
 const pool = require("../db");
-const authorization = require("../middleware/authorization");
 
-router.get("/", authorization, async (req, res) => {
+router.get("/", authorize, async (req, res) => {
   try {
-    const user = await pool.query("SELECT * FROM user WHERE user_id=$1", [
-      req.user,
-    ]);
-    res.json(user.rows[0])
+    const user = await pool.query(
+      "SELECT user_name FROM users WHERE user_id = $1",
+      [req.user.id]
+    );
+
+    //if would be req.user if you change your payload to this:
+
+    //   function jwtGenerator(user_id) {
+    //   const payload = {
+    //     user: user_id
+    //   };
+
+    res.json(user.rows[0]);
   } catch (err) {
-    console.error(err);
-    res.status(500).json("Server error");
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
 });
+
 module.exports = router;
