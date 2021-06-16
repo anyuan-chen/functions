@@ -1,8 +1,9 @@
 import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Navbar from "../components/Navbar"
 
-export const Login = ({ setAuth }) => {
+export const Login = ({ isAuth, setAuth }) => {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -35,6 +36,7 @@ export const Login = ({ setAuth }) => {
   };
   return (
     <Fragment>
+      <Navbar isAuth = {isAuth} ></Navbar>
       <h1 className="text-center my-5">Login</h1>
       <form onSubmit={onSubmitForm}>
         <input

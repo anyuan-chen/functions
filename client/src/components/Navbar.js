@@ -1,7 +1,43 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ isAuth }) {
+  const dd = isAuth ? (
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li>
+        <Link to="/login" class="text-decoration-none">
+          {" "}
+          <p class="dropdown-item text-decoration-none">My Account</p>{" "}
+        </Link>
+      </li>
+      <li>
+        <li>
+          <Link to="/register" class="text-decoration-none">
+            {" "}
+            <p class="dropdown-item">Logout</p>{" "}
+          </Link>
+        </li>
+      </li>
+    </ul>
+  ) : (
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li>
+        <Link to="/login" class="text-decoration-none">
+          {" "}
+          <p class="dropdown-item text-decoration-none">Login</p>{" "}
+        </Link>
+      </li>
+      <li>
+        <li>
+          <Link to="/register" class="text-decoration-none">
+            {" "}
+            <p class="dropdown-item">Register</p>{" "}
+          </Link>
+        </li>
+      </li>
+    </ul>
+  );
+
   return (
     <nav class="navbar navbar-light bg-light navbar-expand-lg">
       <div class="container-fluid">
@@ -27,24 +63,9 @@ export default function Navbar() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown
+                Account
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <Link to="/login" class="text-decoration-none">
-                    {" "}
-                    <p class="dropdown-item text-decoration-none">Login</p>{" "}
-                  </Link>
-                </li>
-                <li>
-                  <li>
-                    <Link to="/register" class="text-decoration-none">
-                      {" "}
-                      <p class="dropdown-item">Register</p>{" "}
-                    </Link>
-                  </li>
-                </li>
-              </ul>
+              {dd}
             </li>
           </ul>
         </div>
