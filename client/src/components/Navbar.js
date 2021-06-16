@@ -45,14 +45,20 @@ export default function Navbar({ isAuth }) {
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-                Home
-              </a>
+              <Link to="/" class="text-decoration-none text-secondary">
+                {" "}
+                <a class="nav-link active" aria-current="page">
+                  Home{" "}
+                </a>
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                Explore
-              </a>
+              <Link to="/explore" class="text-decoration-none text-secondary">
+                {" "}
+                <a class="nav-link active" aria-current="page">
+                  Explore{" "}
+                </a>
+              </Link>
             </li>
             <li class="nav-item dropdown">
               <a
