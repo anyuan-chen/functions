@@ -36,7 +36,7 @@ export const Login = ({ isAuth, setAuth }) => {
   };
   return (
     <Fragment>
-      <Navbar isAuth = {isAuth} ></Navbar>
+      <Navbar isAuth = {isAuth} setAuth = {setAuth} ></Navbar>
       <h1 className="text-center my-5">Login</h1>
       <form onSubmit={onSubmitForm}>
         <input

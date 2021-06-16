@@ -77,7 +77,7 @@ function App() {
               path="/dashboard"
               render={(props) =>
                 isAuthenticated ? (
-                  <Dashboard {...props} setAuth = {setAuth}/>
+                  <Dashboard {...props} isAuth = {isAuthenticated} setAuth = {setAuth}/>
                 ) : (
                   <Redirect to="login"></Redirect>
                 )

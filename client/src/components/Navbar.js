@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logout from "../utils/authentication"
 
-export default function Navbar({ isAuth }) {
+export default function Navbar({ isAuth, setAuth }) {
   const dd = isAuth ? (
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li>
@@ -12,10 +13,7 @@ export default function Navbar({ isAuth }) {
       </li>
       <li>
         <li>
-          <Link to="/register" class="text-decoration-none">
-            {" "}
-            <p class="dropdown-item">Logout</p>{" "}
-          </Link>
+          <button onClick={e => logout(e, setAuth)}class="dropdown-item">Logout</button>{" "}
         </li>
       </li>
     </ul>
