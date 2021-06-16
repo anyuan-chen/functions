@@ -17,11 +17,6 @@ export const Dashboard = ({ isAuth, setAuth }) => {
       console.error(err);
     }
   }
-  const logout = (e) => {
-    e.preventDefault()
-    localStorage.removeItem("token")
-    setAuth(false)
-  }
   useEffect(() => {
     getName();
   }, []);
