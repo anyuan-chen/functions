@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import { toast, toastify } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import Home from "./components/Home";
 
 toast.configure()
 
@@ -35,11 +36,20 @@ function App() {
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean)
   }
+  console.log(isAuthenticated)
   return (
     <Fragment>
       <Router>
         <div className="container">
           <Switch>
+            <Route
+                exact 
+                path = "/" 
+                render={(props) => 
+                  <Home {...props} isAuth = {isAuthenticated}>
+              
+                  </Home>}>
+            </Route>
             <Route
               exact
               path="/login"
