@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { Fragment , useState} from "react";
 
 export default function Functions() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return (
+    <Fragment>
+      <h1>
+          kekw
+      </h1>
+    </Fragment>
+  );
 }

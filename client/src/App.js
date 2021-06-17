@@ -13,6 +13,7 @@ import { toast, toastify } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./components/Home";
 import Explore from "./components/Explore";
+import Add from "./components/function/Add"
 
 toast.configure();
 
@@ -45,6 +46,17 @@ function App() {
           <Switch>
             <Route
               exact
+              path="/add"
+              render={(props) =>
+                isAuthenticated ? (
+                  <Add></Add>
+                ) : (
+                  <redirect to="/login"></redirect>
+                )
+              }
+            ></Route>
+            <Route
+              exact
               path="/explore"
               render={(props) => (
                 <Explore
@@ -58,7 +70,11 @@ function App() {
               exact
               path="/"
               render={(props) => (
-                <Home {...props} isAuth={isAuthenticated} setAuth={setAuth}></Home>
+                <Home
+                  {...props}
+                  isAuth={isAuthenticated}
+                  setAuth={setAuth}
+                ></Home>
               )}
             ></Route>
             <Route

@@ -6,9 +6,15 @@ export default function Navbar({ isAuth, setAuth }) {
   const dd = isAuth ? (
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
       <li>
-        <Link to="/login" class="text-decoration-none">
+        <Link to="/dashboard" class="text-decoration-none">
           {" "}
           <p class="dropdown-item text-decoration-none">My Account</p>{" "}
+        </Link>
+      </li>
+      <li>
+        <Link to="/add" class="text-decoration-none">
+          {" "}
+          <p class="dropdown-item text-decoration-none">Add A Function</p>{" "}
         </Link>
       </li>
       <li>
