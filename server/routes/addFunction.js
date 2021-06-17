@@ -3,8 +3,6 @@ const pool = require("../db.js");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {});
-
 router.post("/add", async (req, res) => {
   if (req.files === null) {
     return res.status(400).json("Bad Request");

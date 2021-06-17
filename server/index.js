@@ -13,7 +13,8 @@ app.use(fileUpload())
 //register + login
 app.use("/auth" , require("./routes/jwtAuth"))
 app.use("/dashboard", require("./routes/dashboard"))
-app.use("/functions", require("./routes/publicFunction"))
+app.use("/functions", require("./routes/addFunction"))
+app.use("/functions", require("./routes/getFunction"))
 app.listen(5000, () => {
   console.log("working");
 });
