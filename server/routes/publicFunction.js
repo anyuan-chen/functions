@@ -11,7 +11,6 @@ router.post("/add", async (req, res) => {
   }
   const file = req.files.file;
   const { title, description, user_id } = req.body;
-  console.log(req.body)
   const fileLocation = `/users/andrewchen/code/functionsdata/${file.name}`;
   file.mv(fileLocation, (err) => {
     if (err) {
