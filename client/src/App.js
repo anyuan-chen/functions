@@ -13,7 +13,7 @@ import { toast, toastify } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./components/Home";
 import Explore from "./components/Explore";
-import Add from "./components/function/Add"
+import Add from "./components/function/Add";
 
 toast.configure();
 
@@ -49,9 +49,13 @@ function App() {
               path="/add"
               render={(props) =>
                 isAuthenticated ? (
-                  <Add></Add>
+                  <Add
+                    {...props}
+                    isAuth={isAuthenticated}
+                    setAuth={setAuth}
+                  ></Add>
                 ) : (
-                  <redirect to="/login"></redirect>
+                  <Redirect to="/login"></Redirect>
                 )
               }
             ></Route>

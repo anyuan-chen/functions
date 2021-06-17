@@ -1,7 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect} from "react";
 import axios from "axios";
+import Navbar from "../Navbar"
 
-export default function Add() {
+export default function Add({isAuth, setAuth}) {
   const [user_id, setUser_id] = useState();
   const [file, setFile] = useState();
   const [title, setTitle] = useState();
@@ -15,13 +16,16 @@ export default function Add() {
         headers: { token: localStorage.token },
       });
       const parseRes = await response.json();
-      console.log(parseRes);
       setUser_id(parseRes.user_id);
+      console.log(parseRes.user_id);
+      console.log(user_id)
     } catch (err) {
       console.error(err);
     }
   };
-
+  useEffect(() => {
+    getId();
+  }, [])
   const onChangeFile = (e) => {
     setFile(e.target.files[0]);
     console.log(file);
@@ -36,13 +40,12 @@ export default function Add() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    await getId();
     const formData = new FormData();
     formData.append("file", file);
     formData.append("title", title);
     formData.append("description", description);
     formData.append("user_id", user_id);
-    console.log(user_id)
+    console.log(user_id);
     try {
       const res = await axios.post(
         "http://localhost:5000/functions/add",
@@ -61,6 +64,7 @@ export default function Add() {
   };
   return (
     <Fragment>
+      <Navbar isAuth={isAuth} setAuth={setAuth}></Navbar>
       <form onSubmit={onSubmit}>
         <label htmlFor="title" className="form-label">
           Title
