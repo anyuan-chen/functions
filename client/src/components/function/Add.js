@@ -1,13 +1,13 @@
-import { Fragment, useState, useEffect} from "react";
+import { Fragment, useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../Navbar"
+import Navbar from "../Navbar";
+import { toast } from "react-toastify";
 
-export default function Add({isAuth, setAuth}) {
+export default function Add({ isAuth, setAuth }) {
   const [user_id, setUser_id] = useState();
   const [file, setFile] = useState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-  const [uploadedFile, setUploadedFile] = useState({});
 
   const getId = async () => {
     try {
@@ -18,14 +18,14 @@ export default function Add({isAuth, setAuth}) {
       const parseRes = await response.json();
       setUser_id(parseRes.user_id);
       console.log(parseRes.user_id);
-      console.log(user_id)
+      console.log(user_id);
     } catch (err) {
       console.error(err);
     }
   };
   useEffect(() => {
     getId();
-  }, [])
+  }, []);
   const onChangeFile = (e) => {
     setFile(e.target.files[0]);
     console.log(file);
@@ -47,19 +47,19 @@ export default function Add({isAuth, setAuth}) {
     formData.append("user_id", user_id);
     console.log(user_id);
     try {
-      const res = await axios.post(
-        "http://localhost:5000/functions/add",
-        formData,
-        {
-          headers: {
-            "Content-type": "multipart/form-data",
-          },
-        }
-      );
-      const { fileName, filePath } = res.data;
-      setUploadedFile({ fileName, filePath });
+      await axios.post("http://localhost:5000/functions/add", formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      toast.success("function added");
     } catch (err) {
       console.error(err);
+      if (file === undefined) {
+        toast.error("u rlly didnt add a file huh");
+      } else {
+        toast.error("kekw another server error");
+      }
     }
   };
   return (

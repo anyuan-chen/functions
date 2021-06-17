@@ -45,36 +45,35 @@ export default function Navbar({ isAuth, setAuth }) {
   return (
     <nav class="navbar navbar-light bg-light navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand">Functions</a>
+        <p class="navbar-brand">Functions</p>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
               <Link to="/" class="text-decoration-none text-secondary">
                 {" "}
-                <a class="nav-link active" aria-current="page">
+                <p class="nav-link active" aria-current="page">
                   Home{" "}
-                </a>
+                </p>
               </Link>
             </li>
-            <li class="nav-item">
+            <li class="nav-ite  m">
               <Link to="/explore" class="text-decoration-none text-secondary">
                 {" "}
-                <a class="nav-link active" aria-current="page">
+                <p class="nav-link active" aria-current="page">
                   Explore{" "}
-                </a>
+                </p>
               </Link>
             </li>
             <li class="nav-item dropdown">
-              <a
+              <p
                 class="nav-link dropdown-toggle"
-                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Account
-              </a>
+              </p>
               {dd}
             </li>
           </ul>
