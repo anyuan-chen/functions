@@ -2,11 +2,26 @@ import { Fragment, useState } from "react";
 import axios from "axios";
 
 export default function Add() {
+  const [user_id, setUser_id] = useState();
   const [file, setFile] = useState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-
   const [uploadedFile, setUploadedFile] = useState({});
+
+  const getId = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/dashboard/id", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
+      const parseRes = await response.json();
+      console.log(parseRes);
+      setUser_id(parseRes.user_id);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const onChangeFile = (e) => {
     setFile(e.target.files[0]);
     console.log(file);
@@ -16,15 +31,21 @@ export default function Add() {
     console.log(title);
   };
   const onChangeDescription = (e) => {
-      setDescription(e.target.value);
-  }
+    setDescription(e.target.value);
+    console.log(description);
+  };
   const onSubmit = async (e) => {
     e.preventDefault();
+    await getId();
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("user_id", user_id);
+    console.log(user_id)
     try {
       const res = await axios.post(
-        "http://localhost:5000/functions",
+        "http://localhost:5000/functions/add",
         formData,
         {
           headers: {
@@ -57,7 +78,7 @@ export default function Add() {
           className="form-control form-control-lg"
           id="desc"
           rows="10"
-          onChange={onChangeTitle}
+          onChange={onChangeDescription}
         />
         <div className="custom-file mt-4">
           <label htmlFor="formFileLg" className="form-label">
