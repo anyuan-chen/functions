@@ -3,10 +3,21 @@ import axios from "axios";
 
 export default function Add() {
   const [file, setFile] = useState();
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+
   const [uploadedFile, setUploadedFile] = useState({});
-  const onChange = (e) => {
+  const onChangeFile = (e) => {
     setFile(e.target.files[0]);
+    console.log(file);
   };
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+    console.log(title);
+  };
+  const onChangeDescription = (e) => {
+      setDescription(e.target.value);
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -30,15 +41,33 @@ export default function Add() {
   return (
     <Fragment>
       <form onSubmit={onSubmit}>
+        <label htmlFor="title" className="form-label">
+          Title
+        </label>
+        <input
+          className="form-control form-control-lg"
+          id="title"
+          type="text"
+          onChange={onChangeTitle}
+        />
+        <label htmlFor="desc" className="form-label">
+          Description
+        </label>
+        <textarea
+          className="form-control form-control-lg"
+          id="desc"
+          rows="10"
+          onChange={onChangeTitle}
+        />
         <div className="custom-file mt-4">
-          <label for="formFileLg" class="form-label">
+          <label htmlFor="formFileLg" className="form-label">
             Code Snippet
           </label>
           <input
-            class="form-control form-control-lg"
+            className="form-control form-control-lg"
             id="formFileLg"
             type="file"
-            onChange={onChange}
+            onChange={onChangeFile}
           />
         </div>
 
