@@ -8,4 +8,4 @@ const pool = new Pool({
   database: "functions",
 });
 
-module.exports = pool;
+module.exports = pool;   
